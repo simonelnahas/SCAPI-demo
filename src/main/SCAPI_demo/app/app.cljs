@@ -8,13 +8,13 @@
             [reagent.core :as r]))
 
 (def spreadsheetID "15NPv2oqI0Rjb63vRc3mFDdMrJdJ7UWdy3ExxA9gwcK8")
-(def dev-api "http://localhost:5001/spreadsheet-model-api/us-central1/app/api/")
-;; (def SCAPI-API "https://sprdsht.to/api/15NPv2oqI0Rjb63vRc3mFDdMrJdJ7UWdy3ExxA9gwcK8")
+;; (def dev-api "http://localhost:5001/spreadsheet-model-api/us-central1/app/api/")
+(def prod-api "https://sprdsht.to/api/")
 
 
 (defn calculate-break-even [yearly-energy-usage response]
   (reset! response {:status :loading})
-  (go (let [r (<! (http/get (str dev-api spreadsheetID)
+  (go (let [r (<! (http/get (str prod-api spreadsheetID)
                             {:with-credentials? false
                              :query-params {"yearly-energy-usage" yearly-energy-usage}}))]
         (reset! response {:status (if (:success r) :success :error)
