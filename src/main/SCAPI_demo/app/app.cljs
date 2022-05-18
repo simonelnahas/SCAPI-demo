@@ -7,15 +7,11 @@
             [reagent-mui.material.text-field :refer [text-field]]
             [reagent.core :as r]))
 
-(def spreadsheetID "15NPv2oqI0Rjb63vRc3mFDdMrJdJ7UWdy3ExxA9gwcK8")
-(def dev-api "http://localhost:5001/spreadsheet-model-api/us-central1/app/api/")
-(def prod-api "https://sprdsht.to/api/")
-(def prod-full-api "https://us-central1-spreadsheet-model-api.cloudfunctions.net/app/api/")
-
+(def API "https://sprdsht.to/api/15NPv2oqI0Rjb63vRc3mFDdMrJdJ7UWdy3ExxA9gwcK8")
 
 (defn calculate-break-even [yearly-energy-usage response]
   (reset! response {:status :loading})
-  (go (let [r (<! (http/get (str prod-api spreadsheetID)
+  (go (let [r (<! (http/get API
                             {:with-credentials? false
                              :query-params {"yearly-energy-usage" yearly-energy-usage}}))]
         (prn r)
