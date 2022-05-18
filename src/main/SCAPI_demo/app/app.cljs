@@ -9,7 +9,7 @@
 
 (def spreadsheetID "15NPv2oqI0Rjb63vRc3mFDdMrJdJ7UWdy3ExxA9gwcK8")
 (def dev-api "http://localhost:5001/spreadsheet-model-api/us-central1/app/api/")
-(def prod-api "http://sprdsht.to/api/")
+(def prod-api "https://sprdsht.to/api/")
 (def prod-full-api "https://us-central1-spreadsheet-model-api.cloudfunctions.net/app/api/")
 
 
