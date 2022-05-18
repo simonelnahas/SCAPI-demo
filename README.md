@@ -2,7 +2,7 @@
 
 The demo is based on the fictional company
 HouseEnergy, which needs to make their Google
-Sheets calculator on available on their website.
+Sheets calculator available on their website.
 
 Try the live version here:
 https://scapi-demo.vercel.app
