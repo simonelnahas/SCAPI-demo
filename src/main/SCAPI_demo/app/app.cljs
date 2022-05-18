@@ -8,8 +8,9 @@
             [reagent.core :as r]))
 
 (def spreadsheetID "15NPv2oqI0Rjb63vRc3mFDdMrJdJ7UWdy3ExxA9gwcK8")
-;; (def dev-api "http://localhost:5001/spreadsheet-model-api/us-central1/app/api/")
-(def prod-api "https://sprdsht.to/api/")
+(def dev-api "http://localhost:5001/spreadsheet-model-api/us-central1/app/api/")
+(def prod-api "http://sprdsht.to/api/")
+(def prod-full-api "https://us-central1-spreadsheet-model-api.cloudfunctions.net/app/api/")
 
 
 (defn calculate-break-even [yearly-energy-usage response]
@@ -17,6 +18,7 @@
   (go (let [r (<! (http/get (str prod-api spreadsheetID)
                             {:with-credentials? false
                              :query-params {"yearly-energy-usage" yearly-energy-usage}}))]
+        (prn r)
         (reset! response {:status (if (:success r) :success :error)
                           :results (get-in r [:body :results])}))))
 
@@ -25,7 +27,7 @@
    [:p label]
    (case (:status response)
      :success [:h1 (get-in response [:results value]) " " unit]
-     :error [:h1 "error: " (get-in response [:error])]
+     :error [:h1 "error"]
      :loading [:h1 [skeleton]]
      [:h1 "0 " unit])])
 
